@@ -155,7 +155,7 @@ describe("/api/v1/movies/showTimings", () => {
         time: payload.showTimes[0].start,
       })
       .send({
-        quantity: 50,
+        quantity: 60,
       });
     const { status } = response;
     expect(status).toBe(400);
