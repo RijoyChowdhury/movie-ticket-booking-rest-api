@@ -33,4 +33,4 @@ jobs:
         echo ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }} >> .env
         echo DATABASE_URI=${{ secrets.DATABASE_URI }} >> .env
         echo SALT_ROUND=${{ secrets.SALT_ROUND }} >> .env
-    - run: npm test
+        npm test
