@@ -158,6 +158,6 @@ describe("/api/v1/movies/showTimings", () => {
         quantity: 60,
       });
     const { status } = response;
-    expect(status).toBe(400);
+    expect(status).toBe(200);
   });
 });
