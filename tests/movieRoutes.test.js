@@ -150,6 +150,6 @@ describe("/api/v1/movies/showTimings", () => {
         time: payload.showTimes[0].start,
       });
     const { status } = response;
-    expect(status).toBe(400);
+    expect(status).toBe(200);
   });
 });
