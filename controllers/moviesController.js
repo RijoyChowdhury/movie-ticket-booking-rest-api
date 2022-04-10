@@ -1,4 +1,3 @@
-const { StatusCodes } = require("http-status-codes");
 const Movie = require("../models/Movie");
 const Moviehall = require("../models/MovieHall");
 const Showtiming = require("../models/ShowTiming");
