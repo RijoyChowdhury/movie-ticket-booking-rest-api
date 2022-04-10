@@ -103,16 +103,12 @@ describe("/api/v1/movies/showTimings", () => {
     expect(JSON.parse(text)).toEqual({ data: [] });
   });
   test("should return unauthorised if post request is made without access token", async () => {
-    const response = await instance
-      .post("/api/v1/movies/showTimings")
-      .query({
-        hallId: payload.hallId,
-        movieId: payload.movieId,
-        time: payload.showTimes[0].start,
-      })
-      .send({
-        quantity: 2,
-      });
+    const response = await instance.post("/api/v1/movies/showTimings").send({
+      quantity: 2,
+      hallId: payload.hallId,
+      movieId: payload.movieId,
+      time: payload.showTimes[0].start,
+    });
     const { status } = response;
     expect(status).toBe(401);
   });
@@ -126,13 +122,11 @@ describe("/api/v1/movies/showTimings", () => {
     const response = await instance
       .post("/api/v1/movies/showTimings")
       .set("Authorization", `Bearer ${accessToken}`)
-      .query({
+      .send({
+        quantity: 2,
         hallId: payload.hallId,
         movieId: payload.movieId,
         time: payload.showTimes[0].start,
-      })
-      .send({
-        quantity: 2,
       });
     const { status, text } = response;
     const { success, seatsBooked } = JSON.parse(text);
@@ -149,13 +143,11 @@ describe("/api/v1/movies/showTimings", () => {
     const response = await instance
       .post("/api/v1/movies/showTimings")
       .set("Authorization", `Bearer ${accessToken}`)
-      .query({
+      .send({
+        quantity: 60,
         hallId: payload.hallId,
         movieId: payload.movieId,
         time: payload.showTimes[0].start,
-      })
-      .send({
-        quantity: 60,
       });
     const { status } = response;
     expect(status).toBe(400);
