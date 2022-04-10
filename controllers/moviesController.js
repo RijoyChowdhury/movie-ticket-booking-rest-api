@@ -1,4 +1,3 @@
-const { StatusCodes } = require("http-status-codes");
 const Movie = require("../models/Movie");
 const Moviehall = require("../models/MovieHall");
 const Showtiming = require("../models/ShowTiming");
@@ -58,18 +57,16 @@ const addNewMovieToHall = async (req, res) => {
 };
 
 const bookShow = async (req, res) => {
-  const { movieId, hallId, time } = req.query;
-  const { quantity } = req.body;
-  const queryObj = {};
-  if (movieId) {
-    queryObj.movieId = movieId;
+  const { movieId, hallId, time, quantity } = req.body;
+  if (!movieId || !hallId || !time || !quantity) {
+    throw new BadRequestError("Missing parameters");
   }
-  if (hallId) {
-    queryObj.hallId = hallId;
-  }
-  if (time) {
-    queryObj["showTimes.start"] = time;
-  }
+
+  const queryObj = {
+    movieId,
+    hallId,
+    "showTimes.start": time,
+  };
   let result = Showtiming.findOne(queryObj);
 
   const data = await result;
